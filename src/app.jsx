@@ -1,5 +1,6 @@
 import { Icons } from '~/components/icons';
 import { SearchBar } from '~/components/search-bar';
+import { SidebarList } from '~/components/sidebar';
 import { Button } from '~/components/ui/button';
 
 export function App() {
@@ -13,6 +14,13 @@ export function App() {
 
         <SearchBar />
       </header>
+
+      <main className="grid grid-cols-[260px,1fr,2fr]">
+        <SidebarList />
+
+        <div className="border-x p-2">list</div>
+        <div className="p-2">content</div>
+      </main>
     </div>
   );
 }
