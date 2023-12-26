@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
@@ -18,6 +18,16 @@ export function NoteDetailPage({ notes, onDelete, onArchive }) {
             {showFormattedDate(note.createdAt)}
           </span>
           <div className="flex gap-2">
+            <Button
+              as={Link}
+              to="edit"
+              size="icon"
+              variant="outline"
+              className="size-8"
+            >
+              <Icons.Edit size={16} />
+              <span className="sr-only">Edit note</span>
+            </Button>
             <Button
               size="icon"
               variant="outline"

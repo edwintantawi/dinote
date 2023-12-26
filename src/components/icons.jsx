@@ -2,6 +2,7 @@ import {
   ArchiveIcon,
   BookOpenIcon,
   CommandIcon,
+  EditIcon,
   LayersIcon,
   PlusIcon,
   SearchIcon,
@@ -18,4 +19,5 @@ export const Icons = {
   Archive: ArchiveIcon,
   Plus: PlusIcon,
   Delete: TrashIcon,
+  Edit: EditIcon,
 };

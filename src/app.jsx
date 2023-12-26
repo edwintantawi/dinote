@@ -9,6 +9,7 @@ import { SidebarList } from '~/components/sidebar';
 import { Button } from '~/components/ui/button';
 import { NoteAddPage } from '~/pages/note-add-page';
 import { NoteDetailPage } from '~/pages/note-detail-page';
+import { NoteEditPage } from '~/pages/note-edit-page';
 import { NotesArchivePage } from '~/pages/notes-archive-page';
 import { NotesPage } from '~/pages/notes-page';
 import { getAllNotes } from '~/utils/data';
@@ -41,6 +42,17 @@ export function App() {
       setNotes(newNotes);
       navigate(`/archive/${noteId}`);
     };
+  };
+
+  const handleEdit = (editedNote) => {
+    const newNotes = notes.map((note) => {
+      if (note.id === editedNote.id) {
+        return editedNote;
+      }
+      return note;
+    });
+    setNotes(newNotes);
+    navigate(-1);
   };
 
   return (
@@ -77,6 +89,10 @@ export function App() {
                   />
                 }
               />
+              <Route
+                path=":note_id/edit"
+                element={<NoteEditPage notes={notes} onEdit={handleEdit} />}
+              />
               <Route path="new" element={<NoteAddPage onAdd={handleAdd} />} />
             </Route>
             <Route path="archive" element={<NotesArchivePage notes={notes} />}>
@@ -90,6 +106,10 @@ export function App() {
                     onArchive={handleArchive}
                   />
                 }
+              />
+              <Route
+                path=":note_id/edit"
+                element={<NoteEditPage notes={notes} onEdit={handleEdit} />}
               />
             </Route>
           </Route>
