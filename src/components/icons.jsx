@@ -3,6 +3,7 @@ import {
   BookOpenIcon,
   CommandIcon,
   LayersIcon,
+  PlusIcon,
   SearchIcon,
   XIcon,
 } from 'lucide-react';
@@ -14,4 +15,5 @@ export const Icons = {
   Command: CommandIcon,
   Notes: LayersIcon,
   Archive: ArchiveIcon,
+  Plus: PlusIcon,
 };

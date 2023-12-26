@@ -7,23 +7,33 @@ import { NotesLayout } from '~/components/notes-layout';
 import { SearchBar } from '~/components/search-bar';
 import { SidebarList } from '~/components/sidebar';
 import { Button } from '~/components/ui/button';
+import { NoteAddPage } from '~/pages/note-add-page';
 import { NoteDetailPage } from '~/pages/note-detail-page';
 import { NotesArchivePage } from '~/pages/notes-archive-page';
 import { NotesPage } from '~/pages/notes-page';
 import { getAllNotes } from '~/utils/data';
 
 export function App() {
-  const [notes] = React.useState(getAllNotes());
+  const [notes, setNotes] = React.useState(getAllNotes());
+
+  const handleAddNote = (newNote) => {
+    setNotes([...notes, newNote]);
+  };
 
   return (
     <div className="container mx-auto grid h-screen overflow-hidden px-4">
-      <header className="grid h-16 grid-cols-[auto,1fr] items-center gap-4 border-b py-2">
+      <header className="grid h-16 grid-cols-[auto,1fr,auto] items-center gap-4 border-b py-2">
         <Button as={Link} to="/">
           <Icons.Brand size={20} />
           <span>Dinote</span>
         </Button>
 
         <SearchBar />
+
+        <Button as={Link} to="/all/new">
+          <Icons.Plus size={20} />
+          <span>Create new note</span>
+        </Button>
       </header>
 
       <main className="grid grid-cols-[260px,1fr] divide-x">
@@ -37,6 +47,10 @@ export function App() {
               <Route
                 path=":note_id"
                 element={<NoteDetailPage notes={notes} />}
+              />
+              <Route
+                path="new"
+                element={<NoteAddPage addNote={handleAddNote} />}
               />
             </Route>
             <Route path="archive" element={<NotesArchivePage notes={notes} />}>
