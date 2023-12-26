@@ -5,7 +5,7 @@ import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
 import { showFormattedDate } from '~/utils/date';
 
-export function NoteDetailPage({ notes, onDelete }) {
+export function NoteDetailPage({ notes, onDelete, onArchive }) {
   const params = useParams();
 
   const note = notes.find((note) => note.id === params['note_id']);
@@ -17,15 +17,26 @@ export function NoteDetailPage({ notes, onDelete }) {
           <span className="inline-block rounded-full border bg-slate-200 px-3 py-1 text-xs  text-muted-foreground">
             {showFormattedDate(note.createdAt)}
           </span>
-          <Button
-            size="icon"
-            variant="destructive"
-            className="size-8"
-            onClick={onDelete(note.id)}
-          >
-            <Icons.Delete size={16} />
-            <span className="sr-only">Delete note</span>
-          </Button>
+          <div className="flex gap-2">
+            <Button
+              size="icon"
+              variant="outline"
+              className="size-8"
+              onClick={onArchive(note.id)}
+            >
+              <Icons.Archive size={16} />
+              <span className="sr-only">Archive note</span>
+            </Button>
+            <Button
+              size="icon"
+              variant="destructive"
+              className="size-8"
+              onClick={onDelete(note.id)}
+            >
+              <Icons.Delete size={16} />
+              <span className="sr-only">Delete note</span>
+            </Button>
+          </div>
         </div>
 
         <h1 className="text-3xl font-bold">{note.title}</h1>
@@ -47,4 +58,5 @@ NoteDetailPage.propTypes = {
     })
   ).isRequired,
   onDelete: PropTypes.func.isRequired,
+  onArchive: PropTypes.func.isRequired,
 };

@@ -29,6 +29,20 @@ export function App() {
     };
   };
 
+  const handleArchive = (noteId) => {
+    return () => {
+      const newNotes = notes.map((note) => {
+        if (note.id === noteId) {
+          return { ...note, archived: true };
+        }
+        return note;
+      });
+
+      setNotes(newNotes);
+      navigate(`/archive/${noteId}`);
+    };
+  };
+
   return (
     <div className="container mx-auto grid h-screen overflow-hidden px-4">
       <header className="grid h-16 grid-cols-[auto,1fr,auto] items-center gap-4 border-b py-2">
@@ -56,7 +70,11 @@ export function App() {
               <Route
                 path=":note_id"
                 element={
-                  <NoteDetailPage notes={notes} onDelete={handleDelete} />
+                  <NoteDetailPage
+                    notes={notes}
+                    onDelete={handleDelete}
+                    onArchive={handleArchive}
+                  />
                 }
               />
               <Route path="new" element={<NoteAddPage onAdd={handleAdd} />} />
@@ -66,7 +84,11 @@ export function App() {
               <Route
                 path=":note_id"
                 element={
-                  <NoteDetailPage notes={notes} onDelete={handleDelete} />
+                  <NoteDetailPage
+                    notes={notes}
+                    onDelete={handleDelete}
+                    onArchive={handleArchive}
+                  />
                 }
               />
             </Route>
