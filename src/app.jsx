@@ -17,7 +17,7 @@ export function App() {
   const navigate = useNavigate();
   const [notes, setNotes] = React.useState(getAllNotes());
 
-  const handleAddNote = (newNote) => {
+  const handleAdd = (newNote) => {
     setNotes([...notes, newNote]);
   };
 
@@ -58,10 +58,7 @@ export function App() {
                   <NoteDetailPage notes={notes} onDelete={handleDelete} />
                 }
               />
-              <Route
-                path="new"
-                element={<NoteAddPage addNote={handleAddNote} />}
-              />
+              <Route path="new" element={<NoteAddPage onAdd={handleAdd} />} />
             </Route>
             <Route path="archive" element={<NotesArchivePage notes={notes} />}>
               <Route index element={<p>index</p>} />

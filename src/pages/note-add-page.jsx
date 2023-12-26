@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Button } from '~/components/ui/button';
 
-export function NoteAddPage({ addNote }) {
+export function NoteAddPage({ onAdd }) {
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
@@ -27,7 +27,7 @@ export function NoteAddPage({ addNote }) {
       archived: false,
     };
 
-    addNote(newNote);
+    onAdd(newNote);
     navigate(`/n/${id}`);
   };
 
@@ -62,5 +62,5 @@ export function NoteAddPage({ addNote }) {
 }
 
 NoteAddPage.propTypes = {
-  addNote: PropTypes.func.isRequired,
+  onAdd: PropTypes.func.isRequired,
 };
