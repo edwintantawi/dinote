@@ -40,7 +40,6 @@ export function App() {
       });
 
       setNotes(newNotes);
-      navigate(`/archive/${noteId}`);
     };
   };
 

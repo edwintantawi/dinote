@@ -22,7 +22,7 @@ export function Note({ id, title, body, createdAt }) {
           })}
         >
           <Link
-            to={id}
+            to={{ pathname: id, search: window.location.search }}
             className='after:absolute after:inset-0 after:content-[""]'
           >
             {title}

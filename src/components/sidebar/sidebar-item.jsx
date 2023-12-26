@@ -12,7 +12,7 @@ export function SidebarItem({ icon, title, label, link }) {
     <li>
       <Button
         as={Link}
-        to={link}
+        to={{ pathname: link, search: window.location.search }}
         variant={isActive ? 'default' : 'ghost'}
         className="w-full justify-between"
       >

@@ -1,5 +1,7 @@
 import * as React from 'react';
 
+import { useNavigate } from 'react-router-dom';
+
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
@@ -8,6 +10,7 @@ import { cn } from '~/utils/classname';
 export function SearchBar() {
   const inputRef = React.useRef(null);
   const [query, setQuery] = React.useState('');
+  const navigate = useNavigate();
 
   const isEmptyQuery = query === '';
 
@@ -36,7 +39,10 @@ export function SearchBar() {
     setQuery(event.currentTarget.value);
   };
 
-  const handleClearSearch = () => setQuery('');
+  const handleClearSearch = () => {
+    setQuery('');
+    navigate({ search: '' });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -44,6 +50,7 @@ export function SearchBar() {
     if (!query) return;
 
     inputRef.current?.blur();
+    navigate({ search: `q=${query}` });
   };
 
   return (

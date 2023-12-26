@@ -1,11 +1,17 @@
 import PropTypes from 'prop-types';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useSearchParams } from 'react-router-dom';
 
 import { Note } from '~/components/note';
 
 export function NotesPage({ notes }) {
+  const [searchParams] = useSearchParams();
+
+  const searchQuery = searchParams.get('q') || '';
   const activeNotes = notes
     .filter((note) => !note.archived)
+    .filter((note) =>
+      note.title.toLowerCase().includes(searchQuery.toLowerCase())
+    )
     .sort((a, b) => -a.createdAt.localeCompare(b.createdAt));
 
   return (
