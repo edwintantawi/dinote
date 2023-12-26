@@ -34,7 +34,7 @@ export function NotesPage({ notes }) {
                 <Note
                   id={note.id}
                   title={note.title}
-                  body={note.body}
+                  description={note.description}
                   createdAt={note.createdAt}
                   archived={note.archived}
                 />
@@ -62,6 +62,7 @@ NotesPage.propTypes = {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
+      description: PropTypes.string,
       createdAt: PropTypes.string.isRequired,
       archived: PropTypes.bool.isRequired,
     })

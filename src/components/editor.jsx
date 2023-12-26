@@ -140,7 +140,7 @@ export function Editor({ onChange, content, editable = true }) {
       editorProps={{
         attributes: {
           class:
-            'prose prose-sm focus:outline-none max-w-none max-h-[calc(100vh-260px)] overflow-y-auto',
+            'prose prose-md focus:outline-none max-w-none max-h-[calc(100vh-260px)] overflow-y-auto',
         },
       }}
       onUpdate={({ editor }) => {

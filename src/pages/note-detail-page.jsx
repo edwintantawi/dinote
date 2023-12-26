@@ -51,6 +51,9 @@ export function NoteDetailPage({ notes, onDelete, onArchive }) {
         </div>
 
         <h1 className="text-3xl font-bold">{note.title}</h1>
+        <p className="text-muted-foreground">
+          {note.description || '<no description>'}
+        </p>
       </header>
 
       <div key={note.id}>
@@ -66,6 +69,7 @@ NoteDetailPage.propTypes = {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
+      description: PropTypes.string,
       createdAt: PropTypes.string.isRequired,
       archived: PropTypes.bool.isRequired,
     })

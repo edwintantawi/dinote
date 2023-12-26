@@ -18,6 +18,7 @@ export function NoteAddPage({ onAdd }) {
     const formElement = event.currentTarget;
     const formData = new FormData(formElement);
     const title = formData.get('title').trim();
+    const description = formData.get('description').trim();
 
     if (!title || !content) return;
 
@@ -28,6 +29,7 @@ export function NoteAddPage({ onAdd }) {
       id,
       title,
       body: content,
+      description,
       createdAt,
       archived: false,
     };
@@ -45,7 +47,13 @@ export function NoteAddPage({ onAdd }) {
           required
           name="title"
           placeholder="Note title..."
-          className="w-full pb-4 text-3xl font-bold outline-none"
+          className="w-full pb-2 text-3xl font-bold outline-none"
+        />
+        <textarea
+          name="description"
+          rows={1}
+          placeholder="Description..."
+          className="w-full pb-4 outline-none"
         />
         <div className="grow border-y py-4">
           <Editor content={content} onChange={handleChangeContent} />

@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { cn } from '~/utils/classname';
 import { showFormattedDate } from '~/utils/date';
 
-export function Note({ id, title, body, createdAt }) {
+export function Note({ id, title, description, createdAt }) {
   const params = useParams();
 
   const isActive = params['note_id'] === id;
@@ -44,7 +44,7 @@ export function Note({ id, title, body, createdAt }) {
           'text-primary-foreground': isActive,
         })}
       >
-        {body}
+        {description || '<no description>'}
       </p>
     </article>
   );
@@ -53,7 +53,7 @@ export function Note({ id, title, body, createdAt }) {
 Note.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
+  description: PropTypes.string,
   createdAt: PropTypes.string.isRequired,
   archived: PropTypes.bool.isRequired,
 };

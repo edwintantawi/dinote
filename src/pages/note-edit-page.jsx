@@ -23,13 +23,15 @@ export function NoteEditPage({ notes, onEdit }) {
     const formElement = event.currentTarget;
     const formData = new FormData(formElement);
     const title = formData.get('title').trim();
+    const description = formData.get('description').trim();
 
     if (!title || !content) return;
 
     const editedNote = {
       title,
-      body: content,
       id: note.id,
+      body: content,
+      description,
       createdAt: note.createdAt,
       archived: note.archived,
     };
@@ -47,8 +49,15 @@ export function NoteEditPage({ notes, onEdit }) {
           required
           name="title"
           placeholder="Note title..."
-          className="w-full pb-4 text-3xl font-bold outline-none"
+          className="w-full pb-2 text-3xl font-bold outline-none"
           defaultValue={note.title}
+        />
+        <textarea
+          name="description"
+          rows={1}
+          placeholder="Description..."
+          className="w-full pb-4 outline-none"
+          defaultValue={note.description}
         />
         <div className="grow border-y py-4">
           <Editor content={content} onChange={handleChangeContent} />
@@ -70,6 +79,7 @@ NoteEditPage.propTypes = {
       id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
+      description: PropTypes.string,
       createdAt: PropTypes.string.isRequired,
       archived: PropTypes.bool.isRequired,
     })
