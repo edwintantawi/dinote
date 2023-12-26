@@ -7,6 +7,7 @@ import { NotesLayout } from '~/components/notes-layout';
 import { SearchBar } from '~/components/search-bar';
 import { SidebarList } from '~/components/sidebar';
 import { Button } from '~/components/ui/button';
+import { NotFoundPage } from '~/pages/not-found-page';
 import { NoteAddPage } from '~/pages/note-add-page';
 import { NoteDetailPage } from '~/pages/note-detail-page';
 import { NoteEditPage } from '~/pages/note-edit-page';
@@ -56,7 +57,7 @@ export function App() {
   };
 
   return (
-    <div className="container mx-auto grid h-screen grid-rows-[auto,1fr] overflow-hidden px-4">
+    <div className="mx-auto grid h-screen max-w-[1500px] grid-rows-[auto,1fr] overflow-hidden px-4">
       <header className="grid h-16 grid-cols-[auto,1fr,auto] items-center gap-4 border-b py-2">
         <Button as={Link} to="/">
           <Icons.Brand size={20} />
@@ -113,6 +114,7 @@ export function App() {
               />
             </Route>
           </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
     </div>
