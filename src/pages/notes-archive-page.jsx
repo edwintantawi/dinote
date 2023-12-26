@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { Outlet, useSearchParams } from 'react-router-dom';
 
 import { Note } from '~/components/note';
+import { cn } from '~/utils/classname';
 
 export function NotesArchivePage({ notes }) {
   const [searchParams] = useSearchParams();
@@ -14,10 +15,19 @@ export function NotesArchivePage({ notes }) {
     )
     .sort((a, b) => -a.createdAt.localeCompare(b.createdAt));
 
+  const isEmpty = archivedNotes.length === 0;
+
   return (
     <>
       <div className="pl-2 pt-2">
-        <ul className="h-[calc(100vh-64px)] space-y-2 overflow-y-auto pb-4 pr-2">
+        <ul
+          className={cn(
+            'h-[calc(100vh-64px)] space-y-2 overflow-y-auto pb-4 pr-2',
+            {
+              'h-[calc(100vh-114px)]': Boolean(searchQuery),
+            }
+          )}
+        >
           {archivedNotes.map((note) => {
             return (
               <li key={note.id}>
@@ -31,9 +41,15 @@ export function NotesArchivePage({ notes }) {
               </li>
             );
           })}
+
+          {isEmpty && (
+            <li className="px-6 py-4 text-center text-muted-foreground">
+              &ldquo; There are no archived notes yet &rdquo;
+            </li>
+          )}
         </ul>
       </div>
-      <div className="p-2">
+      <div className="p-2 pb-4">
         <Outlet />
       </div>
     </>
