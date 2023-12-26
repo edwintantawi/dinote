@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
@@ -8,8 +8,12 @@ import { Input } from '~/components/ui/input';
 import { cn } from '~/utils/classname';
 
 export function SearchBar() {
+  const [searchParams] = useSearchParams();
+
+  const searchQuery = searchParams.get('q') || '';
+
   const inputRef = React.useRef(null);
-  const [query, setQuery] = React.useState('');
+  const [query, setQuery] = React.useState(searchQuery);
   const navigate = useNavigate();
 
   const isEmptyQuery = query === '';
