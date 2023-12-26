@@ -114,7 +114,14 @@ export function App() {
               />
             </Route>
           </Route>
-          <Route path="*" element={<NotFoundPage />} />
+          <Route
+            path="*"
+            element={
+              <div className="h-full p-2">
+                <NotFoundPage />
+              </div>
+            }
+          />
         </Routes>
       </main>
     </div>

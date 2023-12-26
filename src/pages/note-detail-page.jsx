@@ -4,12 +4,17 @@ import { Link, useParams } from 'react-router-dom';
 import { Editor } from '~/components/editor';
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
+import { NotFoundPage } from '~/pages/not-found-page';
 import { showFormattedDate } from '~/utils/date';
 
 export function NoteDetailPage({ notes, onDelete, onArchive }) {
   const params = useParams();
 
   const note = notes.find((note) => note.id === params['note_id']);
+
+  if (note === undefined) {
+    return <NotFoundPage />;
+  }
 
   return (
     <article className="p-4">
