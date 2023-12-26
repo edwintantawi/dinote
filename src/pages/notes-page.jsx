@@ -9,7 +9,7 @@ export function NotesPage({ notes }) {
   return (
     <>
       <div className="pl-2 pt-2">
-        <ul className="grid h-[calc(100vh-64px)] gap-2 overflow-y-auto pb-4 pr-2">
+        <ul className="h-[calc(100vh-64px)] space-y-2 overflow-y-auto pb-4 pr-2">
           {activeNotes.map((note) => {
             return (
               <li key={note.id}>
