@@ -4,7 +4,9 @@ import { Outlet } from 'react-router-dom';
 import { Note } from '~/components/note';
 
 export function NotesArchivePage({ notes }) {
-  const archivedNotes = notes.filter((note) => note.archived);
+  const archivedNotes = notes
+    .filter((note) => note.archived)
+    .sort((a, b) => -a.createdAt.localeCompare(b.createdAt));
 
   return (
     <>
