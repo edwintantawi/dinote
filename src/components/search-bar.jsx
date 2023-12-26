@@ -68,7 +68,7 @@ export function SearchBar() {
         className={cn('h-10 truncate px-11', {
           'pr-14': isEmptyQuery,
         })}
-        placeholder="Explore subjects & topics"
+        placeholder="Find your notes..."
         value={query}
         onChange={handleChangeQuery}
       />
