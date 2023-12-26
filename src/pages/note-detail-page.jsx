@@ -20,7 +20,7 @@ export function NoteDetailPage({ notes, onDelete, onArchive }) {
           <div className="flex gap-2">
             <Button
               as={Link}
-              to="edit"
+              to={{ pathname: 'edit', search: window.location.search }}
               size="icon"
               variant="outline"
               className="size-8"
