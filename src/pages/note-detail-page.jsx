@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 
+import { Editor } from '~/components/editor';
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
 import { showFormattedDate } from '~/utils/date';
@@ -52,7 +53,9 @@ export function NoteDetailPage({ notes, onDelete, onArchive }) {
         <h1 className="text-3xl font-bold">{note.title}</h1>
       </header>
 
-      <p className="text-lg text-muted-foreground">{note.body}</p>
+      <div key={note.id}>
+        <Editor editable={false} content={note.body} />
+      </div>
     </article>
   );
 }

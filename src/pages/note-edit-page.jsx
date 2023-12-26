@@ -1,6 +1,9 @@
+import * as React from 'react';
+
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 
+import { Editor } from '~/components/editor';
 import { Button } from '~/components/ui/button';
 
 export function NoteEditPage({ notes, onEdit }) {
@@ -8,19 +11,24 @@ export function NoteEditPage({ notes, onEdit }) {
 
   const note = notes.find((note) => note.id === params['note_id']);
 
+  const [content, setContent] = React.useState(note.body);
+
+  const handleChangeContent = (newContent) => {
+    setContent(newContent);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const formElement = event.currentTarget;
     const formData = new FormData(formElement);
     const title = formData.get('title').trim();
-    const body = formData.get('body').trim();
 
-    if (!title || !body) return;
+    if (!title || !content) return;
 
     const editedNote = {
       title,
-      body,
+      body: content,
       id: note.id,
       createdAt: note.createdAt,
       archived: note.archived,
@@ -42,14 +50,9 @@ export function NoteEditPage({ notes, onEdit }) {
           className="w-full pb-4 text-3xl font-bold outline-none"
           defaultValue={note.title}
         />
-        <textarea
-          required
-          name="body"
-          placeholder="Start write your note..."
-          className="w-full grow border-y py-2 outline-none"
-          defaultValue={note.body}
-        />
-
+        <div className="grow border-y py-4">
+          <Editor content={content} onChange={handleChangeContent} />
+        </div>
         <div className="flex justify-end gap-2 pt-4">
           <Button variant="destructive" type="reset" as={Link} to={-1}>
             Cancel

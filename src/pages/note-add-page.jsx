@@ -1,17 +1,25 @@
+import * as React from 'react';
+
 import PropTypes from 'prop-types';
 
+import { Editor } from '~/components/editor';
 import { Button } from '~/components/ui/button';
 
 export function NoteAddPage({ onAdd }) {
+  const [content, setContent] = React.useState('');
+
+  const handleChangeContent = (newContent) => {
+    setContent(newContent);
+  };
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     const formElement = event.currentTarget;
     const formData = new FormData(formElement);
     const title = formData.get('title').trim();
-    const body = formData.get('body').trim();
 
-    if (!title || !body) return;
+    if (!title || !content) return;
 
     const id = String(+new Date());
     const createdAt = new Date().toISOString();
@@ -19,7 +27,7 @@ export function NoteAddPage({ onAdd }) {
     const newNote = {
       id,
       title,
-      body,
+      body: content,
       createdAt,
       archived: false,
     };
@@ -39,13 +47,9 @@ export function NoteAddPage({ onAdd }) {
           placeholder="Note title..."
           className="w-full pb-4 text-3xl font-bold outline-none"
         />
-        <textarea
-          required
-          name="body"
-          placeholder="Start write your note..."
-          className="w-full grow border-y py-2 outline-none"
-        />
-
+        <div className="grow border-y py-4">
+          <Editor content={content} onChange={handleChangeContent} />
+        </div>
         <div className="flex justify-end gap-2 pt-4">
           <Button variant="destructive" type="reset">
             Clear
