@@ -30,7 +30,7 @@ export function App() {
 
         <SearchBar />
 
-        <Button as={Link} to="/all/new">
+        <Button as={Link} to="/n/new">
           <Icons.Plus size={20} />
           <span>Create new note</span>
         </Button>
@@ -41,8 +41,8 @@ export function App() {
 
         <Routes>
           <Route path="/" element={<NotesLayout />}>
-            <Route index element={<Navigate to="/all" />} />
-            <Route path="all" element={<NotesPage notes={notes} />}>
+            <Route index element={<Navigate to="/n" />} />
+            <Route path="n" element={<NotesPage notes={notes} />}>
               <Route index element={<p>index</p>} />
               <Route
                 path=":note_id"

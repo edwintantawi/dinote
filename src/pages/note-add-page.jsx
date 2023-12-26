@@ -28,7 +28,7 @@ export function NoteAddPage({ addNote }) {
     };
 
     addNote(newNote);
-    navigate(`/all/${id}`);
+    navigate(`/n/${id}`);
   };
 
   return (

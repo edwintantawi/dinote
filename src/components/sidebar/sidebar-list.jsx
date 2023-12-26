@@ -9,7 +9,7 @@ export function SidebarList({ notes }) {
       title: 'All Notes',
       icon: <Icons.Notes size={20} />,
       label: notes.filter((note) => !note.archived).length,
-      link: '/all',
+      link: '/n',
     },
     {
       title: 'Archive',
