@@ -1,11 +1,8 @@
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 
 import { Button } from '~/components/ui/button';
 
 export function NoteAddPage({ onAdd }) {
-  const navigate = useNavigate();
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
@@ -28,7 +25,6 @@ export function NoteAddPage({ onAdd }) {
     };
 
     onAdd(newNote);
-    navigate(`/n/${id}`);
   };
 
   return (

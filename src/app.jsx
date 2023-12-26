@@ -19,6 +19,7 @@ export function App() {
 
   const handleAdd = (newNote) => {
     setNotes([...notes, newNote]);
+    navigate(`/n/${newNote.id}`);
   };
 
   const handleDelete = (noteId) => {
