@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router-dom';
 
+import { Icons } from '~/components/icons';
+import { Button } from '~/components/ui/button';
 import { showFormattedDate } from '~/utils/date';
 
-export function NoteDetailPage({ notes }) {
+export function NoteDetailPage({ notes, onDelete }) {
   const params = useParams();
 
   const note = notes.find((note) => note.id === params['note_id']);
@@ -11,9 +13,21 @@ export function NoteDetailPage({ notes }) {
   return (
     <article className="p-4">
       <header className="mb-4 space-y-2 border-b pb-4">
-        <span className="inline-block rounded-full border bg-slate-200 px-3 py-1 text-xs  text-muted-foreground">
-          {showFormattedDate(note.createdAt)}
-        </span>
+        <div className="flex items-center justify-between">
+          <span className="inline-block rounded-full border bg-slate-200 px-3 py-1 text-xs  text-muted-foreground">
+            {showFormattedDate(note.createdAt)}
+          </span>
+          <Button
+            size="icon"
+            variant="destructive"
+            className="size-8"
+            onClick={onDelete(note.id)}
+          >
+            <Icons.Delete size={16} />
+            <span className="sr-only">Delete note</span>
+          </Button>
+        </div>
+
         <h1 className="text-3xl font-bold">{note.title}</h1>
       </header>
 
@@ -32,4 +46,5 @@ NoteDetailPage.propTypes = {
       archived: PropTypes.bool.isRequired,
     })
   ).isRequired,
+  onDelete: PropTypes.func.isRequired,
 };

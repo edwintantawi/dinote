@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Link, Navigate, Route, Routes } from 'react-router-dom';
+import { Link, Navigate, Route, Routes, useNavigate } from 'react-router-dom';
 
 import { Icons } from '~/components/icons';
 import { NotesLayout } from '~/components/notes-layout';
@@ -14,10 +14,18 @@ import { NotesPage } from '~/pages/notes-page';
 import { getAllNotes } from '~/utils/data';
 
 export function App() {
+  const navigate = useNavigate();
   const [notes, setNotes] = React.useState(getAllNotes());
 
   const handleAddNote = (newNote) => {
     setNotes([...notes, newNote]);
+  };
+
+  const handleDelete = (noteId) => {
+    return () => {
+      setNotes(notes.filter((note) => note.id !== noteId));
+      navigate('/');
+    };
   };
 
   return (
@@ -46,7 +54,9 @@ export function App() {
               <Route index element={<p>index</p>} />
               <Route
                 path=":note_id"
-                element={<NoteDetailPage notes={notes} />}
+                element={
+                  <NoteDetailPage notes={notes} onDelete={handleDelete} />
+                }
               />
               <Route
                 path="new"
@@ -57,7 +67,9 @@ export function App() {
               <Route index element={<p>index</p>} />
               <Route
                 path=":note_id"
-                element={<NoteDetailPage notes={notes} />}
+                element={
+                  <NoteDetailPage notes={notes} onDelete={handleDelete} />
+                }
               />
             </Route>
           </Route>

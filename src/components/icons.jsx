@@ -5,6 +5,7 @@ import {
   LayersIcon,
   PlusIcon,
   SearchIcon,
+  TrashIcon,
   XIcon,
 } from 'lucide-react';
 
@@ -16,4 +17,5 @@ export const Icons = {
   Notes: LayersIcon,
   Archive: ArchiveIcon,
   Plus: PlusIcon,
+  Delete: TrashIcon,
 };
