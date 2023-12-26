@@ -10,6 +10,7 @@ import { Button } from '~/components/ui/button';
 import { NoteAddPage } from '~/pages/note-add-page';
 import { NoteDetailPage } from '~/pages/note-detail-page';
 import { NoteEditPage } from '~/pages/note-edit-page';
+import { NoteIndexPage } from '~/pages/note-index-page';
 import { NotesArchivePage } from '~/pages/notes-archive-page';
 import { NotesPage } from '~/pages/notes-page';
 import { getAllNotes } from '~/utils/data';
@@ -55,7 +56,7 @@ export function App() {
   };
 
   return (
-    <div className="container mx-auto grid h-screen overflow-hidden px-4">
+    <div className="container mx-auto grid h-screen grid-rows-[auto,1fr] overflow-hidden px-4">
       <header className="grid h-16 grid-cols-[auto,1fr,auto] items-center gap-4 border-b py-2">
         <Button as={Link} to="/">
           <Icons.Brand size={20} />
@@ -70,14 +71,14 @@ export function App() {
         </Button>
       </header>
 
-      <main className="grid grid-cols-[260px,1fr] divide-x">
+      <main className="grid grid-cols-[260px,1fr] items-start divide-x">
         <SidebarList notes={notes} />
 
         <Routes>
           <Route path="/" element={<NotesLayout />}>
             <Route index element={<Navigate to="/n" />} />
             <Route path="n" element={<NotesPage notes={notes} />}>
-              <Route index element={<p>index</p>} />
+              <Route index element={<NoteIndexPage />} />
               <Route
                 path=":note_id"
                 element={
@@ -95,7 +96,7 @@ export function App() {
               <Route path="new" element={<NoteAddPage onAdd={handleAdd} />} />
             </Route>
             <Route path="archive" element={<NotesArchivePage notes={notes} />}>
-              <Route index element={<p>index</p>} />
+              <Route index element={<NoteIndexPage />} />
               <Route
                 path=":note_id"
                 element={
