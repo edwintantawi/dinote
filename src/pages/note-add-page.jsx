@@ -51,8 +51,10 @@ export function NoteAddPage({ addNote }) {
         />
 
         <div className="flex justify-end gap-2 pt-4">
-          <Button variant="destructive">Clear</Button>
-          <Button>Save note</Button>
+          <Button variant="destructive" type="reset">
+            Clear
+          </Button>
+          <Button type="submit">Save note</Button>
         </div>
       </div>
     </form>
