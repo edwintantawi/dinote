@@ -7,6 +7,7 @@ import { NotesLayout } from '~/components/notes-layout';
 import { SearchBar } from '~/components/search-bar';
 import { SidebarList } from '~/components/sidebar';
 import { Button } from '~/components/ui/button';
+import { ThemeContext } from '~/contexts/theme-context';
 import { NotFoundPage } from '~/pages/not-found-page';
 import { NoteAddPage } from '~/pages/note-add-page';
 import { NoteDetailPage } from '~/pages/note-detail-page';
@@ -17,6 +18,7 @@ import { NotesPage } from '~/pages/notes-page';
 import { getAllNotes } from '~/utils/data';
 
 export function App() {
+  const { theme, toggleTheme } = React.useContext(ThemeContext);
   const navigate = useNavigate();
   const [notes, setNotes] = React.useState(getAllNotes());
 
@@ -66,10 +68,20 @@ export function App() {
 
         <SearchBar />
 
-        <Button as={Link} to="/n/new">
-          <Icons.Plus size={20} />
-          <span>Create new note</span>
-        </Button>
+        <div className="flex gap-2">
+          <Button variant="outline" size="icon" onClick={toggleTheme}>
+            {theme === 'dark' ? (
+              <Icons.Light size={20} />
+            ) : (
+              <Icons.Dark size={20} />
+            )}
+            <span className="sr-only">Toogle theme</span>
+          </Button>
+          <Button as={Link} to="/n/new">
+            <Icons.Plus size={20} />
+            <span>Create new note</span>
+          </Button>
+        </div>
       </header>
 
       <main className="grid grid-cols-[260px,1fr] items-start divide-x">

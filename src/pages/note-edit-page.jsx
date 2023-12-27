@@ -49,14 +49,14 @@ export function NoteEditPage({ notes, onEdit }) {
           required
           name="title"
           placeholder="Note title..."
-          className="w-full pb-2 text-3xl font-bold outline-none"
+          className="w-full bg-transparent pb-2 text-3xl font-bold outline-none"
           defaultValue={note.title}
         />
         <textarea
           name="description"
           rows={1}
           placeholder="Description..."
-          className="w-full pb-4 outline-none"
+          className="w-full bg-transparent pb-4 outline-none"
           defaultValue={note.description}
         />
         <div className="grow border-y py-4">

@@ -12,9 +12,11 @@ import {
   LayersIcon,
   ListIcon,
   ListOrderedIcon,
+  MoonIcon,
   PlusIcon,
   SearchIcon,
   StrikethroughIcon,
+  SunIcon,
   TextIcon,
   TextQuoteIcon,
   TrashIcon,
@@ -42,4 +44,6 @@ export const Icons = {
   BulletList: ListIcon,
   OrderedList: ListOrderedIcon,
   Blockquote: TextQuoteIcon,
+  Light: SunIcon,
+  Dark: MoonIcon,
 };
