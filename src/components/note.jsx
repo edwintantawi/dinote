@@ -30,9 +30,9 @@ export function Note({ id, title, description, createdAt }) {
         </h3>
         <span
           className={cn(
-            'inline-block rounded-full border bg-slate-200 px-3 py-1 text-xs text-muted-foreground dark:text-primary-foreground',
+            'inline-block rounded-full border bg-slate-200 px-3 py-1 text-xs text-muted-foreground dark:text-muted-foreground',
             {
-              'bg-slate-700 text-primary-foreground dark:bg-slate-200':
+              'bg-slate-700 text-primary-foreground dark:bg-primary-foreground dark:text-primary':
                 isActive,
             }
           )}
