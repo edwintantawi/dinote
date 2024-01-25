@@ -20,7 +20,7 @@ export function NoteDetailPage({ notes, onDelete, onArchive }) {
     <article className="p-4">
       <header className="mb-4 space-y-2 border-b pb-4">
         <div className="flex items-center justify-between">
-          <span className="inline-block rounded-full border bg-slate-200 px-3 py-1 text-xs text-muted-foreground dark:text-primary-foreground">
+          <span className="inline-block rounded-full border bg-slate-200 px-3 py-1 text-xs text-muted-foreground">
             {showFormattedDate(note.createdAt)}
           </span>
           <div className="flex gap-2">
