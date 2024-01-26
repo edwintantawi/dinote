@@ -5,10 +5,12 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
+import { useTranslation } from '~/hooks/use-translation';
 import { cn } from '~/utils/classname';
 
 export function SearchBar() {
   const [searchParams] = useSearchParams();
+  const t = useTranslation();
 
   const searchQuery = searchParams.get('q') || '';
 
@@ -68,7 +70,7 @@ export function SearchBar() {
         className={cn('h-10 truncate px-11', {
           'pr-14': isEmptyQuery,
         })}
-        placeholder="Find your notes..."
+        placeholder={t.SEARCH.PLACEHOLDER}
         value={query}
         onChange={handleChangeQuery}
       />

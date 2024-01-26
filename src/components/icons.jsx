@@ -1,5 +1,6 @@
 import {
   ArchiveIcon,
+  ArchiveXIcon,
   BoldIcon,
   BookOpenIcon,
   Code2Icon,
@@ -30,6 +31,7 @@ export const Icons = {
   Command: CommandIcon,
   Notes: LayersIcon,
   Archive: ArchiveIcon,
+  UnArchive: ArchiveXIcon,
   Plus: PlusIcon,
   Delete: TrashIcon,
   Edit: EditIcon,

@@ -5,8 +5,10 @@ import { Link, useParams } from 'react-router-dom';
 
 import { Editor } from '~/components/editor';
 import { Button } from '~/components/ui/button';
+import { useTranslation } from '~/hooks/use-translation';
 
 export function NoteEditPage({ notes, onEdit }) {
+  const t = useTranslation();
   const params = useParams();
 
   const note = notes.find((note) => note.id === params['note_id']);
@@ -48,14 +50,14 @@ export function NoteEditPage({ notes, onEdit }) {
           autoFocus
           required
           name="title"
-          placeholder="Note title..."
+          placeholder={t.NOTE.FORM.TITLE}
           className="w-full bg-transparent pb-2 text-3xl font-bold outline-none"
           defaultValue={note.title}
         />
         <textarea
           name="description"
           rows={1}
-          placeholder="Description..."
+          placeholder={t.NOTE.FORM.DESCRIPTION}
           className="w-full bg-transparent pb-4 outline-none"
           defaultValue={note.description}
         />
@@ -64,9 +66,9 @@ export function NoteEditPage({ notes, onEdit }) {
         </div>
         <div className="flex justify-end gap-2 pt-4">
           <Button variant="destructive" type="reset" as={Link} to={-1}>
-            Cancel
+            {t.NOTE.FORM.CANCEL}
           </Button>
-          <Button type="submit">Save note</Button>
+          <Button type="submit">{t.NOTE.FORM.SAVE}</Button>
         </div>
       </div>
     </form>

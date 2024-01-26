@@ -8,6 +8,7 @@ import { SearchBar } from '~/components/search-bar';
 import { SidebarList } from '~/components/sidebar';
 import { Button } from '~/components/ui/button';
 import { ThemeContext } from '~/contexts/theme-context';
+import { useTranslation } from '~/hooks/use-translation';
 import { NotFoundPage } from '~/pages/not-found-page';
 import { NoteAddPage } from '~/pages/note-add-page';
 import { NoteDetailPage } from '~/pages/note-detail-page';
@@ -18,6 +19,7 @@ import { NotesPage } from '~/pages/notes-page';
 import { getAllNotes } from '~/utils/data';
 
 export function App() {
+  const t = useTranslation();
   const { theme, toggleTheme } = React.useContext(ThemeContext);
   const navigate = useNavigate();
   const [notes, setNotes] = React.useState(getAllNotes());
@@ -38,7 +40,7 @@ export function App() {
     return () => {
       const newNotes = notes.map((note) => {
         if (note.id === noteId) {
-          return { ...note, archived: true };
+          return { ...note, archived: !note.archived };
         }
         return note;
       });
@@ -79,7 +81,7 @@ export function App() {
           </Button>
           <Button as={Link} to="/n/new">
             <Icons.Plus size={20} />
-            <span>Create new note</span>
+            <span>{t.NOTE.CREATE}</span>
           </Button>
         </div>
       </header>

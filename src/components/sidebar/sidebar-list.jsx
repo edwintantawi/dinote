@@ -2,17 +2,20 @@ import PropTypes from 'prop-types';
 
 import { Icons } from '~/components/icons';
 import { SidebarItem } from '~/components/sidebar';
+import { useTranslation } from '~/hooks/use-translation';
 
 export function SidebarList({ notes }) {
+  const t = useTranslation();
+
   const items = [
     {
-      title: 'All Notes',
+      title: t.NOTE.ALL.TITLE,
       icon: <Icons.Notes size={20} />,
       label: notes.filter((note) => !note.archived).length,
       link: '/n',
     },
     {
-      title: 'Archive',
+      title: t.NOTE.ARCHIVE.TITLE,
       icon: <Icons.Archive size={20} />,
       label: notes.filter((note) => note.archived).length,
       link: '/archive',

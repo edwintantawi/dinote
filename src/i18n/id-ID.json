@@ -1,0 +1,30 @@
+{
+  "SEARCH": {
+    "PLACEHOLDER": "Cari catatan mu..."
+  },
+  "NOTE": {
+    "CREATE": "Buat catatan baru",
+    "FORM": {
+      "TITLE": "Judul catatan",
+      "DESCRIPTION": "Deskripsi catatan...",
+      "BODY": "Tulis sesuatu...",
+      "SAVE": "Simpan catatan",
+      "CLEAR": "Bersihkan",
+      "CANCEL": "Batal"
+    },
+    "ALL": {
+      "TITLE": "Semua catatan",
+      "EMPTY": "Belum ada catatan aktif"
+    },
+    "ARCHIVE": {
+      "TITLE": "Arsip",
+      "EMPTY": "Belum ada catatan yang diarsipkan"
+    },
+    "DETAIL": {
+      "EMPTY": {
+        "TITLE": "Belum ada catatan yang di pilih",
+        "DESCRIPTION": "Silakan pilih salah satu catatan untuk dilihat"
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "SEARCH": {
+    "PLACEHOLDER": "Find your notes..."
+  },
+  "NOTE": {
+    "CREATE": "Create new note",
+    "FORM": {
+      "TITLE": "Note title",
+      "DESCRIPTION": "Note description...",
+      "BODY": "Write something...",
+      "SAVE": "Save note",
+      "CLEAR": "Clear",
+      "CANCEL": "Cancel"
+    },
+    "ALL": {
+      "TITLE": "All notes",
+      "EMPTY": "There are no active notes yet"
+    },
+    "ARCHIVE": {
+      "TITLE": "Archived notes",
+      "EMPTY": "There are no archived notes yet"
+    },
+    "DETAIL": {
+      "EMPTY": {
+        "TITLE": "There is no selected note",
+        "DESCRIPTION": "Please select one of the notes to view"
+      }
+    }
+  }
+}

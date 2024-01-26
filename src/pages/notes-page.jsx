@@ -2,9 +2,11 @@ import PropTypes from 'prop-types';
 import { Outlet, useSearchParams } from 'react-router-dom';
 
 import { Note } from '~/components/note';
+import { useTranslation } from '~/hooks/use-translation';
 import { cn } from '~/utils/classname';
 
 export function NotesPage({ notes }) {
+  const t = useTranslation();
   const [searchParams] = useSearchParams();
 
   const searchQuery = searchParams.get('q') || '';
@@ -44,7 +46,7 @@ export function NotesPage({ notes }) {
 
           {isEmpty && (
             <li className="px-6 py-4 text-center text-muted-foreground">
-              &ldquo; There are no active notes yet &rdquo;
+              &ldquo; {t.NOTE.ALL.EMPTY} &rdquo;
             </li>
           )}
         </ul>

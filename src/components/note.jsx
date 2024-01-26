@@ -1,11 +1,12 @@
 import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 
+import { useDateFormatter } from '~/hooks/use-date-formatter';
 import { cn } from '~/utils/classname';
-import { showFormattedDate } from '~/utils/date';
 
 export function Note({ id, title, description, createdAt }) {
   const params = useParams();
+  const formatDate = useDateFormatter();
 
   const isActive = params['note_id'] === id;
 
@@ -37,7 +38,7 @@ export function Note({ id, title, description, createdAt }) {
             }
           )}
         >
-          {showFormattedDate(createdAt)}
+          {formatDate(createdAt)}
         </span>
       </header>
       <p

@@ -10,6 +10,7 @@ import PropTypes from 'prop-types';
 
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
+import { useTranslation } from '~/hooks/use-translation';
 
 function MenuBar() {
   const { editor } = useCurrentEditor();
@@ -122,16 +123,17 @@ function MenuBar() {
   );
 }
 
-const extensions = [
-  StarterKit,
-  Placeholder.configure({
-    placeholder: 'Write something...',
-    emptyEditorClass:
-      'cursor-text before:content-[attr(data-placeholder)] before:absolute top-0 before:text-slate-300 before-pointer-events-none',
-  }),
-];
-
 export function Editor({ onChange, content, editable = true }) {
+  const t = useTranslation();
+
+  const extensions = [
+    StarterKit,
+    Placeholder.configure({
+      placeholder: t.NOTE.FORM.BODY,
+      emptyEditorClass:
+        'cursor-text before:content-[attr(data-placeholder)] before:absolute top-0 before:text-slate-300 before-pointer-events-none',
+    }),
+  ];
   return (
     <EditorProvider
       extensions={extensions}

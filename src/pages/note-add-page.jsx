@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 
 import { Editor } from '~/components/editor';
 import { Button } from '~/components/ui/button';
+import { useTranslation } from '~/hooks/use-translation';
 
 export function NoteAddPage({ onAdd }) {
+  const t = useTranslation();
   const [content, setContent] = React.useState('');
 
   const handleChangeContent = (newContent) => {
@@ -39,20 +41,20 @@ export function NoteAddPage({ onAdd }) {
 
   return (
     <form onSubmit={handleSubmit} className="h-full p-4">
-      <h1 className="sr-only">Create new note</h1>
+      <h1 className="sr-only">{t.NOTE.CREATE}</h1>
 
       <div className="flex h-full flex-col">
         <input
           autoFocus
           required
           name="title"
-          placeholder="Note title..."
+          placeholder={t.NOTE.FORM.TITLE}
           className="w-full bg-transparent pb-2 text-3xl font-bold outline-none"
         />
         <textarea
           name="description"
           rows={1}
-          placeholder="Description..."
+          placeholder={t.NOTE.FORM.DESCRIPTION}
           className="w-full bg-transparent pb-4 outline-none"
         />
         <div className="grow border-y py-4">
@@ -60,9 +62,9 @@ export function NoteAddPage({ onAdd }) {
         </div>
         <div className="flex justify-end gap-2 pt-4">
           <Button variant="destructive" type="reset">
-            Clear
+            {t.NOTE.FORM.CLEAR}
           </Button>
-          <Button type="submit">Save note</Button>
+          <Button type="submit">{t.NOTE.FORM.SAVE}</Button>
         </div>
       </div>
     </form>

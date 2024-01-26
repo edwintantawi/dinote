@@ -4,11 +4,12 @@ import { Link, useParams } from 'react-router-dom';
 import { Editor } from '~/components/editor';
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
+import { useDateFormatter } from '~/hooks/use-date-formatter';
 import { NotFoundPage } from '~/pages/not-found-page';
-import { showFormattedDate } from '~/utils/date';
 
 export function NoteDetailPage({ notes, onDelete, onArchive }) {
   const params = useParams();
+  const formatDate = useDateFormatter();
 
   const note = notes.find((note) => note.id === params['note_id']);
 
@@ -21,7 +22,7 @@ export function NoteDetailPage({ notes, onDelete, onArchive }) {
       <header className="mb-4 space-y-2 border-b pb-4">
         <div className="flex items-center justify-between">
           <span className="inline-block rounded-full border bg-slate-200 px-3 py-1 text-xs text-muted-foreground">
-            {showFormattedDate(note.createdAt)}
+            {formatDate(note.createdAt)}
           </span>
           <div className="flex gap-2">
             <Button
@@ -40,7 +41,11 @@ export function NoteDetailPage({ notes, onDelete, onArchive }) {
               className="size-8"
               onClick={onArchive(note.id)}
             >
-              <Icons.Archive size={16} />
+              {note.archived ? (
+                <Icons.UnArchive size={16} />
+              ) : (
+                <Icons.Archive size={16} />
+              )}
               <span className="sr-only">Archive note</span>
             </Button>
             <Button
