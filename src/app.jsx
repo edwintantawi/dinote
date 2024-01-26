@@ -7,6 +7,8 @@ import { NotesLayout } from '~/components/notes-layout';
 import { SearchBar } from '~/components/search-bar';
 import { SidebarList } from '~/components/sidebar';
 import { Button } from '~/components/ui/button';
+import { LOCALE } from '~/constants/locale';
+import { LocaleContext } from '~/contexts/locale-context';
 import { ThemeContext } from '~/contexts/theme-context';
 import { useTranslation } from '~/hooks/use-translation';
 import { NotFoundPage } from '~/pages/not-found-page';
@@ -21,6 +23,7 @@ import { getAllNotes } from '~/utils/data';
 export function App() {
   const t = useTranslation();
   const { theme, toggleTheme } = React.useContext(ThemeContext);
+  const { locale, toggleLocale } = React.useContext(LocaleContext);
   const navigate = useNavigate();
   const [notes, setNotes] = React.useState(getAllNotes());
 
@@ -79,7 +82,13 @@ export function App() {
             )}
             <span className="sr-only">Toogle theme</span>
           </Button>
-          <Button as={Link} to="/n/new">
+          <Button variant="outline" size="icon" onClick={toggleLocale}>
+            <span className="sr-only">Toogle language</span>
+            <span className="font-mono">
+              {locale === LOCALE.ID ? 'ID' : 'EN'}
+            </span>
+          </Button>
+          <Button as={Link} to="/n/new" className="w-44">
             <Icons.Plus size={20} />
             <span>{t.NOTE.CREATE}</span>
           </Button>

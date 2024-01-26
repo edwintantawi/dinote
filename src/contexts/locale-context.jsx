@@ -15,12 +15,13 @@ export function LocaleProvider({ children }) {
     localStorage.setItem('locale', locale);
   }, [locale]);
 
-  const changeLocale = (locale) => {
-    setLocale(locale);
+  const toggleLocale = () => {
+    const newLocale = locale === LOCALE.EN ? LOCALE.ID : LOCALE.EN;
+    setLocale(newLocale);
   };
 
   return (
-    <LocaleContext.Provider value={{ locale, changeLocale }}>
+    <LocaleContext.Provider value={{ locale, toggleLocale }}>
       {children}
     </LocaleContext.Provider>
   );
