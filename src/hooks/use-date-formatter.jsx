@@ -1,13 +1,7 @@
-import * as React from 'react';
-
-import { LocaleContext } from '~/contexts/locale-context';
+import { useLocale } from '~/hooks/use-locale';
 
 export function useDateFormatter() {
-  const context = React.useContext(LocaleContext);
-
-  if (!context) {
-    throw new Error('useDateFormatter must be used within a LocaleProvider');
-  }
+  const { locale } = useLocale();
 
   const options = {
     weekday: 'long',
@@ -16,5 +10,5 @@ export function useDateFormatter() {
     day: 'numeric',
   };
 
-  return (date) => new Date(date).toLocaleDateString(context.locale, options);
+  return (date) => new Date(date).toLocaleDateString(locale, options);
 }

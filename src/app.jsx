@@ -8,8 +8,8 @@ import { SearchBar } from '~/components/search-bar';
 import { SidebarList } from '~/components/sidebar';
 import { Button } from '~/components/ui/button';
 import { LOCALE } from '~/constants/locale';
-import { LocaleContext } from '~/contexts/locale-context';
 import { ThemeContext } from '~/contexts/theme-context';
+import { useLocale } from '~/hooks/use-locale';
 import { useTranslation } from '~/hooks/use-translation';
 import { NotFoundPage } from '~/pages/not-found-page';
 import { NoteAddPage } from '~/pages/note-add-page';
@@ -23,7 +23,7 @@ import { getAllNotes } from '~/utils/data';
 export function App() {
   const t = useTranslation();
   const { theme, toggleTheme } = React.useContext(ThemeContext);
-  const { locale, toggleLocale } = React.useContext(LocaleContext);
+  const { locale, toggleLocale } = useLocale();
   const navigate = useNavigate();
   const [notes, setNotes] = React.useState(getAllNotes());
 
