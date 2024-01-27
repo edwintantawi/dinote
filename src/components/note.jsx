@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useDateFormatter } from '~/hooks/use-date-formatter';
 import { cn } from '~/utils/classname';
 
-export function Note({ id, title, description, createdAt }) {
+export function Note({ id, title, createdAt }) {
   const params = useParams();
   const formatDate = useDateFormatter();
 
@@ -41,13 +41,6 @@ export function Note({ id, title, description, createdAt }) {
           {formatDate(createdAt)}
         </span>
       </header>
-      <p
-        className={cn('line-clamp-2 text-sm text-muted-foreground', {
-          'text-primary-foreground': isActive,
-        })}
-      >
-        {description || '<no description>'}
-      </p>
     </article>
   );
 }

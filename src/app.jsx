@@ -25,7 +25,7 @@ export function App() {
         }
       >
         <Route index element={<Navigate to="/n" />} />
-        <Route path="n" element={<NotesPage notes={[]} />}>
+        <Route path="n" element={<NotesPage />}>
           <Route index element={<NoteIndexPage />} />
           <Route
             path=":note_id"
@@ -41,7 +41,7 @@ export function App() {
             path=":note_id/edit"
             element={<NoteEditPage notes={[]} onEdit={() => {}} />}
           />
-          <Route path="new" element={<NoteAddPage onAdd={() => {}} />} />
+          <Route path="new" element={<NoteAddPage />} />
         </Route>
         <Route path="archive" element={<NotesArchivePage notes={[]} />}>
           <Route index element={<NoteIndexPage />} />

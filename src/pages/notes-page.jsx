@@ -1,23 +1,28 @@
-import PropTypes from 'prop-types';
 import { Outlet, useSearchParams } from 'react-router-dom';
 
 import { Note } from '~/components/note';
+import { Skeleton } from '~/components/ui/skeleton';
+import { useNotes } from '~/hooks/use-notes';
 import { useTranslation } from '~/hooks/use-translation';
 import { cn } from '~/utils/classname';
 
-export function NotesPage({ notes }) {
+export function NotesPage() {
   const t = useTranslation();
   const [searchParams] = useSearchParams();
 
   const searchQuery = searchParams.get('q') || '';
-  const activeNotes = notes
-    .filter((note) => !note.archived)
+
+  const { data = [], isLoading } = useNotes({
+    search: searchQuery,
+  });
+
+  const notes = data
     .filter((note) =>
       note.title.toLowerCase().includes(searchQuery.toLowerCase())
     )
     .sort((a, b) => -a.createdAt.localeCompare(b.createdAt));
 
-  const isEmpty = activeNotes.length === 0;
+  const isEmpty = !isLoading && notes.length === 0;
 
   return (
     <>
@@ -30,19 +35,25 @@ export function NotesPage({ notes }) {
             }
           )}
         >
-          {activeNotes.map((note) => {
+          {notes.map((note) => {
             return (
               <li key={note.id}>
                 <Note
                   id={note.id}
                   title={note.title}
-                  description={note.description}
                   createdAt={note.createdAt}
                   archived={note.archived}
                 />
               </li>
             );
           })}
+
+          {isLoading &&
+            new Array(10).fill(0).map((_, index) => (
+              <li key={index}>
+                <Skeleton className="h-20" />
+              </li>
+            ))}
 
           {isEmpty && (
             <li className="px-6 py-4 text-center text-muted-foreground">
@@ -57,16 +68,3 @@ export function NotesPage({ notes }) {
     </>
   );
 }
-
-NotesPage.propTypes = {
-  notes: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      body: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      createdAt: PropTypes.string.isRequired,
-      archived: PropTypes.bool.isRequired,
-    })
-  ).isRequired,
-};

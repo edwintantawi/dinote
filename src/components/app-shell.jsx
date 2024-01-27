@@ -1,7 +1,4 @@
-import {
-  Link,
-  Outlet,
-} from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 
 import { Icons } from '~/components/icons';
 import { NotesLayout } from '~/components/notes-layout';
@@ -51,7 +48,7 @@ export function AppShell() {
       </header>
 
       <main className="grid grid-cols-[260px,1fr] items-start divide-x">
-        <SidebarList notes={[]} />
+        <SidebarList />
 
         <NotesLayout>
           <Outlet />
