@@ -1,20 +1,37 @@
-import PropTypes from 'prop-types';
 import { Link, useParams } from 'react-router-dom';
 
 import { Editor } from '~/components/editor';
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
+import { Skeleton } from '~/components/ui/skeleton';
 import { useDateFormatter } from '~/hooks/use-date-formatter';
-import { NotFoundPage } from '~/pages/not-found-page';
+import { useNote } from '~/hooks/use-note';
 
-export function NoteDetailPage({ notes, onDelete, onArchive }) {
+export function NoteDetailPage() {
   const params = useParams();
   const formatDate = useDateFormatter();
 
-  const note = notes.find((note) => note.id === params['note_id']);
+  const noteId = params['note_id'];
 
-  if (note === undefined) {
-    return <NotFoundPage />;
+  const { data: note = {}, isLoading } = useNote(noteId);
+
+  if (isLoading) {
+    return (
+      <div className="p-4">
+        <div className="flex justify-between gap-2">
+          <Skeleton className="h-8 w-44" />
+          <Skeleton className="h-8 w-28" />
+        </div>
+        <Skeleton className="mt-2 h-9" />
+
+        <div className="mt-8 space-y-2">
+          <Skeleton className="h-7" />
+          <Skeleton className="h-7 w-5/6" />
+          <Skeleton className="h-7 w-4/5" />
+          <Skeleton className="h-7 w-1/2" />
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -27,10 +44,10 @@ export function NoteDetailPage({ notes, onDelete, onArchive }) {
           <div className="flex gap-2">
             <Button
               as={Link}
-              to={{ pathname: 'edit', search: window.location.search }}
+              to={{ pathname: '', search: window.location.search }}
               size="icon"
               variant="outline"
-              className="size-8"
+              className="size-8 cursor-not-allowed opacity-50"
             >
               <Icons.Edit size={16} />
               <span className="sr-only">Edit note</span>
@@ -39,7 +56,7 @@ export function NoteDetailPage({ notes, onDelete, onArchive }) {
               size="icon"
               variant="outline"
               className="size-8"
-              onClick={onArchive(note.id)}
+              // onClick={onArchive(note.id)}
             >
               {note.archived ? (
                 <Icons.UnArchive size={16} />
@@ -52,7 +69,7 @@ export function NoteDetailPage({ notes, onDelete, onArchive }) {
               size="icon"
               variant="destructive"
               className="size-8"
-              onClick={onDelete(note.id)}
+              // onClick={onDelete(note.id)}
             >
               <Icons.Delete size={16} />
               <span className="sr-only">Delete note</span>
@@ -61,9 +78,6 @@ export function NoteDetailPage({ notes, onDelete, onArchive }) {
         </div>
 
         <h1 className="text-3xl font-bold">{note.title}</h1>
-        <p className="text-muted-foreground">
-          {note.description || '<no description>'}
-        </p>
       </header>
 
       <div key={note.id}>
@@ -72,18 +86,3 @@ export function NoteDetailPage({ notes, onDelete, onArchive }) {
     </article>
   );
 }
-
-NoteDetailPage.propTypes = {
-  notes: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      body: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      createdAt: PropTypes.string.isRequired,
-      archived: PropTypes.bool.isRequired,
-    })
-  ).isRequired,
-  onDelete: PropTypes.func.isRequired,
-  onArchive: PropTypes.func.isRequired,
-};
