@@ -1,14 +1,15 @@
 import * as React from 'react';
 
-import PropTypes from 'prop-types';
-
 import { Editor } from '~/components/editor';
 import { Button } from '~/components/ui/button';
+import { useAddNote } from '~/hooks/use-add-note';
 import { useTranslation } from '~/hooks/use-translation';
 
-export function NoteAddPage({ onAdd }) {
+export function NoteAddPage() {
   const t = useTranslation();
   const [content, setContent] = React.useState('');
+
+  const { mutate: addNote, isPending } = useAddNote();
 
   const handleChangeContent = (newContent) => {
     setContent(newContent);
@@ -20,23 +21,15 @@ export function NoteAddPage({ onAdd }) {
     const formElement = event.currentTarget;
     const formData = new FormData(formElement);
     const title = formData.get('title').trim();
-    const description = formData.get('description').trim();
 
     if (!title || !content) return;
 
-    const id = String(+new Date());
-    const createdAt = new Date().toISOString();
-
     const newNote = {
-      id,
       title,
       body: content,
-      description,
-      createdAt,
-      archived: false,
     };
 
-    onAdd(newNote);
+    addNote(newNote);
   };
 
   return (
@@ -49,28 +42,20 @@ export function NoteAddPage({ onAdd }) {
           required
           name="title"
           placeholder={t.NOTE.FORM.TITLE}
-          className="w-full bg-transparent pb-2 text-3xl font-bold outline-none"
-        />
-        <textarea
-          name="description"
-          rows={1}
-          placeholder={t.NOTE.FORM.DESCRIPTION}
-          className="w-full bg-transparent pb-4 outline-none"
+          className="w-full bg-transparent pb-4 text-3xl font-bold outline-none"
         />
         <div className="grow border-y py-4">
           <Editor content={content} onChange={handleChangeContent} />
         </div>
         <div className="flex justify-end gap-2 pt-4">
-          <Button variant="destructive" type="reset">
+          <Button variant="destructive" type="reset" disabled={isPending}>
             {t.NOTE.FORM.CLEAR}
           </Button>
-          <Button type="submit">{t.NOTE.FORM.SAVE}</Button>
+          <Button type="submit" disabled={isPending}>
+            {t.NOTE.FORM.SAVE}
+          </Button>
         </div>
       </div>
     </form>
   );
 }
-
-NoteAddPage.propTypes = {
-  onAdd: PropTypes.func.isRequired,
-};
