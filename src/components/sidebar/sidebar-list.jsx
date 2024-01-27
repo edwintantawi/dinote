@@ -1,5 +1,3 @@
-import PropTypes from 'prop-types';
-
 import { Icons } from '~/components/icons';
 import { SidebarItem } from '~/components/sidebar';
 import { useNotes } from '~/hooks/use-notes';
@@ -42,16 +40,3 @@ export function SidebarList() {
     </nav>
   );
 }
-
-SidebarList.propTypes = {
-  notes: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      body: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      createdAt: PropTypes.string.isRequired,
-      archived: PropTypes.bool.isRequired,
-    })
-  ).isRequired,
-};
