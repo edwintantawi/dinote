@@ -1,6 +1,7 @@
-import { Outlet, useSearchParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { useSearchParams } from 'react-router-dom';
 
-export function NotesLayout() {
+export function NotesLayout({ children }) {
   const [searchParams] = useSearchParams();
 
   const searchQuery = searchParams.get('q') || '';
@@ -15,9 +16,11 @@ export function NotesLayout() {
           </p>
         </div>
       )}
-      <div className="grid grid-cols-[1fr,2fr] divide-x">
-        <Outlet />
-      </div>
+      <div className="grid grid-cols-[1fr,2fr] divide-x">{children}</div>
     </div>
   );
 }
+
+NotesLayout.propTypes = {
+  children: PropTypes.node.isRequired,
+};

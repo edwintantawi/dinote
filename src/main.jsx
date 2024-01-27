@@ -6,6 +6,8 @@ import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { BrowserRouter } from 'react-router-dom';
 
 import { App } from '~/app.jsx';
+import { InitAuth } from '~/components/init-auth';
+import { AuthProvider } from '~/contexts/auth-context';
 import { LocaleProvider } from '~/contexts/locale-context';
 import { ThemeProvider } from '~/contexts/theme-context';
 
@@ -19,7 +21,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <ThemeProvider>
         <LocaleProvider>
           <QueryClientProvider client={queryClient}>
-            <App />
+            <AuthProvider>
+              <InitAuth>
+                <App />
+              </InitAuth>
+            </AuthProvider>
             <ReactQueryDevtools initialIsOpen={false} />
           </QueryClientProvider>
         </LocaleProvider>
