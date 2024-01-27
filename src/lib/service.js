@@ -6,7 +6,7 @@ export class UserService {
   static async getProfile() {
     try {
       const response = await http('/users/me');
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         throw new Error(error.response.data.message);
@@ -23,7 +23,7 @@ export class AuthenticationService {
         method: 'POST',
         data: { name, email, password },
       });
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         throw new Error(error.response.data.message);
@@ -38,7 +38,7 @@ export class AuthenticationService {
         method: 'POST',
         data: { email, password },
       });
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         throw new Error(error.response.data.message);
@@ -55,7 +55,7 @@ export class NoteService {
         method: 'POST',
         data: { title, body },
       });
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         throw new Error(error.response.data.message);
@@ -67,7 +67,7 @@ export class NoteService {
   static async getActive() {
     try {
       const response = await http('/notes');
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         throw new Error(error.response.data.message);
@@ -79,7 +79,7 @@ export class NoteService {
   static async getArchived() {
     try {
       const response = await http('/notes/archived');
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         throw new Error(error.response.data.message);
@@ -91,7 +91,7 @@ export class NoteService {
   static async getById(id) {
     try {
       const response = await http(`/notes/${id}`);
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         throw new Error(error.response.data.message);
@@ -105,7 +105,7 @@ export class NoteService {
       const response = await http(`/notes/${id}/archive`, {
         method: 'POST',
       });
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         throw new Error(error.response.data.message);
@@ -119,7 +119,7 @@ export class NoteService {
       const response = await http(`/notes/${id}/unarchive`, {
         method: 'POST',
       });
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         throw new Error(error.response.data.message);
@@ -133,7 +133,7 @@ export class NoteService {
       const response = await http(`/notes/${id}`, {
         method: 'DELETE',
       });
-      return response.data;
+      return response.data.data;
     } catch (error) {
       if (error instanceof AxiosError) {
         throw new Error(error.response.data.message);

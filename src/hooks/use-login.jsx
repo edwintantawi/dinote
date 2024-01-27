@@ -11,7 +11,7 @@ export function useLogin() {
 
   return useMutation({
     mutationFn: AuthenticationService.login,
-    onSuccess: ({ data }) => {
+    onSuccess: (data) => {
       TokenManager.storeToken({ access_token: data.accessToken });
       setAuth(data);
       navigate('/n');
