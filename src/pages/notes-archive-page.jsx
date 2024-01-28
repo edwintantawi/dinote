@@ -1,17 +1,20 @@
-import PropTypes from 'prop-types';
 import { Outlet, useSearchParams } from 'react-router-dom';
 
 import { Note } from '~/components/note';
+import { Skeleton } from '~/components/ui/skeleton';
+import { useArchivedNotes } from '~/hooks/use-archived-notes';
 import { useTranslation } from '~/hooks/use-translation';
 import { cn } from '~/utils/classname';
 
-export function NotesArchivePage({ notes }) {
+export function NotesArchivePage() {
   const t = useTranslation();
   const [searchParams] = useSearchParams();
 
   const searchQuery = searchParams.get('q') || '';
-  const archivedNotes = notes
-    .filter((note) => note.archived)
+
+  const { data = [], isLoading } = useArchivedNotes();
+
+  const archivedNotes = data
     .filter((note) =>
       note.title.toLowerCase().includes(searchQuery.toLowerCase())
     )
@@ -44,6 +47,13 @@ export function NotesArchivePage({ notes }) {
             );
           })}
 
+          {isLoading &&
+            new Array(10).fill(0).map((_, index) => (
+              <li key={index}>
+                <Skeleton className="h-20" />
+              </li>
+            ))}
+
           {isEmpty && (
             <li className="px-6 py-4 text-center text-muted-foreground">
               &ldquo; {t.NOTE.ARCHIVE.EMPTY} &rdquo;
@@ -57,16 +67,3 @@ export function NotesArchivePage({ notes }) {
     </>
   );
 }
-
-NotesArchivePage.propTypes = {
-  notes: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-      body: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      createdAt: PropTypes.string.isRequired,
-      archived: PropTypes.bool.isRequired,
-    })
-  ).isRequired,
-};

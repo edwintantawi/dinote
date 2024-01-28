@@ -1,11 +1,13 @@
 import { Icons } from '~/components/icons';
 import { SidebarItem } from '~/components/sidebar';
+import { useArchivedNotes } from '~/hooks/use-archived-notes';
 import { useNotes } from '~/hooks/use-notes';
 import { useTranslation } from '~/hooks/use-translation';
 
 export function SidebarList() {
   const t = useTranslation();
   const { data: notes = [] } = useNotes();
+  const { data: archivedNotes = [] } = useArchivedNotes();
 
   const items = [
     {
@@ -17,7 +19,7 @@ export function SidebarList() {
     {
       title: t.NOTE.ARCHIVE.TITLE,
       icon: <Icons.Archive size={20} />,
-      label: notes.filter((note) => note.archived).length,
+      label: archivedNotes.length,
       link: '/archive',
     },
   ];
