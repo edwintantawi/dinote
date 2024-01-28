@@ -13,6 +13,7 @@ import {
   LayersIcon,
   ListIcon,
   ListOrderedIcon,
+  LogOutIcon,
   MoonIcon,
   PlusIcon,
   SearchIcon,
@@ -48,4 +49,5 @@ export const Icons = {
   Blockquote: TextQuoteIcon,
   Light: SunIcon,
   Dark: MoonIcon,
+  LogOut: LogOutIcon,
 };
