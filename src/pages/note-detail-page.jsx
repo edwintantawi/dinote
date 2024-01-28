@@ -4,8 +4,11 @@ import { Editor } from '~/components/editor';
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
 import { Skeleton } from '~/components/ui/skeleton';
+import { useArchiveNote } from '~/hooks/use-archive-note';
 import { useDateFormatter } from '~/hooks/use-date-formatter';
+import { useDeleteNote } from '~/hooks/use-delete-note';
 import { useNote } from '~/hooks/use-note';
+import { useUnArchiveNote } from '~/hooks/use-unarchive-note';
 
 export function NoteDetailPage() {
   const params = useParams();
@@ -14,6 +17,9 @@ export function NoteDetailPage() {
   const noteId = params['note_id'];
 
   const { data: note = {}, isLoading } = useNote(noteId);
+  const { mutate: deleteNote } = useDeleteNote(noteId);
+  const { mutate: archiveNote } = useArchiveNote(noteId);
+  const { mutate: unArchiveNote } = useUnArchiveNote(noteId);
 
   if (isLoading) {
     return (
@@ -56,7 +62,7 @@ export function NoteDetailPage() {
               size="icon"
               variant="outline"
               className="size-8"
-              // onClick={onArchive(note.id)}
+              onClick={note.archived ? unArchiveNote : archiveNote}
             >
               {note.archived ? (
                 <Icons.UnArchive size={16} />
@@ -69,7 +75,7 @@ export function NoteDetailPage() {
               size="icon"
               variant="destructive"
               className="size-8"
-              // onClick={onDelete(note.id)}
+              onClick={deleteNote}
             >
               <Icons.Delete size={16} />
               <span className="sr-only">Delete note</span>
