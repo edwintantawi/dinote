@@ -5,15 +5,7 @@
   "AUTH": {
     "LOGIN": "Masuk",
     "LOGOUT": "Keluar",
-    "REGISTER": "Daftar",
-    "FORM": {
-      "NAME": "Nama",
-      "EMAIL": "Email",
-      "PASSWORD": "Kata sandi",
-      "CONFIRM_PASSWORD": "Konfirmasi kata sandi",
-      "ALREADY_REGISTERED": "Sudah terdaftar?",
-      "NOT_REGISTERED": "Belum terdaftar?"
-    }
+    "REGISTER": "Daftar"
   },
   "NOTE": {
     "CREATE": "Buat catatan baru",

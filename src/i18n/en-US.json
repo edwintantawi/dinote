@@ -5,15 +5,7 @@
   "AUTH": {
     "LOGIN": "Login",
     "LOGOUT": "Logout",
-    "REGISTER": "Register",
-    "FORM": {
-      "NAME": "Name",
-      "EMAIL": "Email",
-      "PASSWORD": "Password",
-      "CONFIRM_PASSWORD": "Confirm password",
-      "ALREADY_REGISTERED": "Already registered?",
-      "NOT_REGISTERED": "Not registered yet?"
-    }
+    "REGISTER": "Register"
   },
   "NOTE": {
     "CREATE": "Create new note",
