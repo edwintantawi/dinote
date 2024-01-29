@@ -19,7 +19,11 @@ export function useInitAuth() {
       setAuth(query.data);
       setInitialize(false);
     }
-  }, [query.data, setAuth]);
+
+    if (query.isError) {
+      setInitialize(false);
+    }
+  }, [query.data, query.isError, setAuth]);
 
   return {
     ...query,
