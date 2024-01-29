@@ -17,8 +17,8 @@ export function useInitAuth() {
   React.useEffect(() => {
     if (query.data) {
       setAuth(query.data);
+      setInitialize(false);
     }
-    setInitialize(false);
   }, [query.data, setAuth]);
 
   return {
