@@ -1,7 +1,7 @@
 import { Icons } from '~/components/icons';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
-import { useRegister } from '~/hooks/user-register';
+import { useRegister } from '~/hooks/use-register';
 
 export function RegisterPage() {
   const { mutate: registerUser, isError, error } = useRegister();
